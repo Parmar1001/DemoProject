@@ -6,7 +6,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display=['customer_id','user_name','date_of_open','balance','account_type','branch_name','phonenum']
 
 class BranchAdmin(admin.ModelAdmin):
-    list_display=['name','city','state']
+    list_display=['branch_name','branch_city','branch_state']
 
 
 admin.site.register(Customer,CustomerAdmin)
