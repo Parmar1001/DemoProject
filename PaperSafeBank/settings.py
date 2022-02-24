@@ -141,5 +141,5 @@ STATICFILES_DIRS=[STATIC_DIR,]
 # SITE_ID = 1 
 
 LOGIN_REDIRECT_URL='/MyApp/customerinfo/'
-LOGOUT_REDIRECT_URL='/MyApp/home/'
-
+LOGOUT_REDIRECT_URL='/MyApp/Home/'
+LOGIN_URL = 'account_login' 

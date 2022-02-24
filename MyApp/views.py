@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from MyApp.forms import SignUpForm,CustomerForm
 from django.http import HttpResponseRedirect
+from django.urls import reverse
+from MyApp.models import Customer,Notification
+
 
 # Create your views here.
 def home_view(request):
@@ -14,12 +17,25 @@ def signup_view(request):
        if signupform.is_valid() :
            user=signupform.save()
            if customerform.is_valid():
-             user.save()
-             return HttpResponseRedirect('/account/login')
-            #  TO  USE reverse() function
+                user.save()
+                return HttpResponseRedirect(reverse('login'))
+                
+
+            
     signupform=SignUpForm()
     customerform=CustomerForm()
 
     mydict={'signupform':signupform,'customerform':customerform}
-    return render(request,'MyApp/sign_up.html',context=mydict)         
+    return render(request,'MyApp/sign_up.html',context=mydict) 
+
+
+def customerInfo(request):
+    show_bal=False
+    noti_count=Notification.objects.filter(user_name_id=request.user.id).count()
+    current_user=request.user
+    customer=Customer.objects.get(user_name_id=current_user.id)
+    if request.method=='POST':
+            show_bal=True
+    return render(request,'MyApp/cust_info.html',{'customer':customer,'current_user':current_user,'show_bal':show_bal,'noti_count':noti_count})
+        
            
