@@ -14,10 +14,19 @@ class Customer(models.Model):
     user_name=models.OneToOneField(User,on_delete=models.CASCADE)
     date_of_open=models.DateTimeField(auto_now_add=True)
     balance=models.FloatField()
-    account_type=models.CharField(max_length=20)
-    branch_name=models.ForeignKey(Branch,on_delete=models.CASCADE)
-    city=models.CharField(max_length=30,default=None)
-    state=models.CharField(max_length=30,default=None)
+    ACCOUNT_CHOICE = (
+        ('Saving','Saving'),('Current','Current')
+    )
+    account_type=models.CharField(max_length = 20,choices = ACCOUNT_CHOICE,default='Saving')
+    branch_name=models.ForeignKey(Branch,related_name='customers',on_delete=models.CASCADE) 
+    CITY_CHOICES= (
+        ('Indore','Indore'),('Dewas','Dewas'),('Mhow','Mhow'),('Bhopal','Bhopal')
+    )
+    city=models.CharField(max_length=30,default='Indore',choices=CITY_CHOICES)
+    state_choices = (
+        ("Madhya Pradesh","Madhya Pradesh"),("Maharashtra","Maharashtra"),("Manipur","Manipur"),("Meghalaya","Meghalaya"),("Mizoram","Mizoram")
+    )
+    state = models.CharField(choices=state_choices, max_length=255, default='Madhya Pradesh')
     phonenum=models.CharField(max_length=10)
     profile_pic=models.ImageField(upload_to='static/images/',default=None)    
 

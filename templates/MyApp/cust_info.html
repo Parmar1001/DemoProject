@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-{% extends "MyApp/base.html" %}
-{% load static %}
-{% block cust %}
+{%extends 'MyApp/base.html'%}
+{%load static%}
+{%block cust_info%}
+<br>
+<br>
+<br>
+<br>
+<div align='center' style=" margin-left: 150px;" >
 
-<div align='center' style=" margin-left: 150px;"></div>
+        <img  style="height:200px;width:200px;border: 5px solid #555;border-radius: 50%;" src="{% static 'images/tj.jpeg' %}">
+      </div>
+      <br>
+
+
 
 <table align='center' style=" margin-left: 600px;">
-  <form method="post">
-    <tr>
-      <td> <button type="submit" class="btn btn-success" style="width:200px;margin-left: 25px;">Check Balance</button>
-      </td>
-      {%csrf_token%}
-    </tr>
+<form  method="post">
+  <tr>
+<td>    <button type="submit" class="btn btn-success" style="width:200px;margin-left: 25px;">Check Balance</button></td>
+{%csrf_token%}
+  </tr>
   </form>
-
   <br>
-
   <tr>
-    Transfer Money
+  <td><a href="/MyApp/transfer/"><button type="button" class="btn btn-success" style="width:200px;margin-left: 25px;">Transfer Money</button></a> </td>
   </tr>
-
-  <tr>
-    Request Money
-  </tr>
-</table>
-
-
-{%if show_bal%}
+  <br>
+<tr>
+<td> <a href="/MyApp/requestmoney"> <button type="button" class="btn btn-success" style="width:200px;margin-left: 25px;">Request Money</button></a> 
+</td>
+</tr>
 <br>
-<table>
 
 </table>
 
-{%endif%}
 
-{% endblock %}
+
+
+        {%if show_bal%}
+        <br>
+        <table border="1px" align='center' style=" margin-left: 470px;">
+          <tr>
+          <td> <h2 style="color:rgb(15, 235, 169);">Your current balance is : {{customer.balance}}</h2>
+</td>
+          </tr>
+
+        </table>
+        {%endif%}
+{%endblock%}

@@ -36,19 +36,30 @@
         <ul class="navbar-nav  ml-auto">
 
           {%if request.user.first_name%}
+
+          <li class="nav-item">
+            <a class="nav-link" href="/MyApp/customerinfo/">Profile</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hello {{request.user.first_name}}</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/account/logout/">Logout</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Hello {{user.username}}</a>
-          </li>
+
           {%else%}
+
+          
+
           <li class="nav-item">
             <a class="nav-link" href="/account/login/">Login</a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link" href="/MyApp/signup/">SignUp</a>
           </li>
+
           {%endif%}
 
         </ul>
@@ -88,6 +99,9 @@
     {% endblock signup %}
     {% block password %}
     {% endblock password %}
+    {%block cust_info%}
+    {%endblock%}
+    
 
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
