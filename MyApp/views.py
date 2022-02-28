@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from MyApp.forms import SignUpForm,CustomerForm
+from MyApp.forms import SignUpForm,CustomerForm,TransferForm,RequestForm
 from django.http import HttpResponseRedirect
 from MyApp.models import Customer,Notification
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+
 
 
 # Create your views here.
@@ -34,11 +36,18 @@ def signup_view(request):
 @login_required
 def customerInfo(request):
     show_bal=False
-    noti_count=Notification.objects.filter(user_name_id=request.user.id).count()
     current_user=request.user
     customer=Customer.objects.get(user_name_id=current_user.id)
     if request.method=='POST': 
             show_bal=True
-    return render(request,'MyApp/cust_info.html',{'customer':customer,'current_user':current_user,'show_bal':show_bal,'noti_count':noti_count})
+    return render(request,'MyApp/cust_info.html',{'customer':customer,'current_user':current_user,'show_bal':show_bal})
+
+@login_required
+def transfer_view(request):
+    return render(request,'MyApp/transfer.html')
+
+@login_required
+def requestMoney_view(request):
+    return render(request,'MyApp/requestMoney.html')
         
            

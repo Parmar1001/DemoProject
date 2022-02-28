@@ -36,3 +36,4 @@ class Notification(models.Model):
     notification_id=models.AutoField(primary_key=True)
     user_name=models.ForeignKey(User,on_delete=models.CASCADE)
     notification=models.CharField(max_length=200,default=None)
+    
