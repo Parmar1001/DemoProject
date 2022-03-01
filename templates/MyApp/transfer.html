@@ -2,11 +2,16 @@
 {%extends 'MyApp/base.html'%}
 {%block transfer%}
 <br><br><br>
-<h1 align='center'>Welcome to RawBank transfer</h1>
+<h1 align='center'>Welcome to PaperSaveBank transfer</h1>
 <br><br><br><br>
-   
+
+<form  method="post">
   <table border="1" align='center'>
+    {{form}}
   </table>
   <br><br>
-  <td><button type="submit" class="btn btn-success" style="width:200px;margin-left: 550px;">Tansfer</button></td>
+  <td>    <button type="submit" class="btn btn-success" style="width:200px;margin-left: 550px;">Tansfer</button></td>
+  {%csrf_token%}
+</form>
+<h2 align='center'>{{msg}}</h2>>
 {%endblock%}

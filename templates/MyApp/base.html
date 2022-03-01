@@ -34,8 +34,10 @@
 
         </ul>
         <ul class="navbar-nav  ml-auto">
-
           {%if request.user.first_name%}
+          <li class="nav-item">
+            <a class="nav-link" href="/MyApp/notification/">Notification({{noti_count}})</a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="/MyApp/customerinfo/">Profile</a>
@@ -83,10 +85,10 @@
     </div>
     {% endif %}
     <div class="sidenav">
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'service' %}">Services</a>
+      <a href="{% url 'clients' %}">Clients</a>
+      <a href="{% url 'contact' %}">Contact</a>
     </div>
 
     {% block home %}
@@ -105,6 +107,17 @@
     {%endblock%}
     {%block transfer%}
     {%endblock%}
+    {%block notification%}
+    {%endblock%}
+    {%block contact%}
+    {%endblock%}
+    {%block services%}
+    {%endblock%}
+    {%block about%}
+    {%endblock%}
+    {%block clients%}
+    {%endblock%}
+
     
 
   </main>

@@ -15,12 +15,12 @@ class CustomerForm(forms.ModelForm):
 
 
 class TransferForm(forms.Form):
-    account=forms.CharField(label='To account number',max_length=10)
+    accno=forms.CharField(label='To account number',max_length=10)
     amount=forms.FloatField(label='Amount to be transfered')
     pin=forms.CharField(max_length=20,label='Your pin')
 
-
+    
 class RequestForm(forms.Form):
-    account=forms.CharField(label='Frequest from user',max_length=10)
+    accno=forms.CharField(label='Frequest from user',max_length=10)
     amount=forms.FloatField(label='Request Amount')
     pin=forms.CharField(max_length=20,label='Your pin')
