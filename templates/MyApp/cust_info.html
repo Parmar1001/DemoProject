@@ -7,9 +7,21 @@
 <br>
 <br>
 <div align='center' style=" margin-left: 150px;" >
-        <img  style="height:200px;width:200px;" src="{% static 'images/customer.profile_pic.path' %}">
+        <img  style="height:200px;width:300px;" src="{% static 'images/dj.jpg' %}">
       </div>
       <br>
+
+      {%if show_bal%}
+        <br>
+        <table border="1px" align='center' style=" margin-left: 470px;">
+          <tr>
+          <td> <h2 style="color:rgb(15, 235, 169);">Your current balance is : {{customer.balance}}</h2>
+</td>
+          </tr>
+
+        </table>
+        {%endif%}
+        
 <table align='center' style=" margin-left: 600px;">
 <form  method="post">
   <tr>
@@ -28,14 +40,5 @@
 </tr>
 <br>
 </table>
-        {%if show_bal%}
-        <br>
-        <table border="1px" align='center' style=" margin-left: 470px;">
-          <tr>
-          <td> <h2 style="color:rgb(15, 235, 169);">Your current balance is : {{customer.balance}}</h2>
-</td>
-          </tr>
-
-        </table>
-        {%endif%}
+        
 {%endblock%}

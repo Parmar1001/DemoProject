@@ -2,38 +2,68 @@
 {%extends 'MyApp/base.html'%}
 {%load static%}
 {%block contact%}
-<section class="contact" id="contact">
-  <div class="max-width" style=" margin-left: 200px;  margin-top: 20px;" >
-      <h2 class="title">Contact Us</h2>
-      <div class="contact-content">
-          <div class="column left">
-              <div class="text">Get in Touch</div>
-              <p>Life becomes a celebration when friends keep in touch, so let's celebrate our life by keeping in touch with each other.</p>
-              <div class="icons">
-                  <div class="row">
-                      <i class="fas fa-user"></i>
-                      <div class="info">
-                          <div class="head">Name</div>
-                          <div class="sub-title">Chetan Parmar</div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <i class="fas fa-map-marker-alt"></i>
-                      <div class="info">
-                          <div class="head">Address</div>
-                          <div class="sub-title">Cleanest Town in country, ❤️Indore, Madhya Pradesh.</div>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <i class="fas fa-envelope"></i>
-                      <div class="info">
-                          <div class="head">Email</div>
-                          <div class="sub-title">cparmar613@gmail.com</div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</section>
+{% load crispy_forms_tags %}
+{% comment %} <div>
+  <img src="{% static 'images/con.png' st %}" style="width:100%;height:100%"></img>
+</div> {% endcomment %}
+
+ {% comment %} <div class="has-bg-img">
+    <h2>Hero Section</h2>
+    <h4>It's easy to set background image with Torus Kit</h4>
+    <img class="bg-img" src="..." alt="...">
+  </div>  {% endcomment %}
+
+{% comment %} <section class="contact" id="contact"> {% endcomment %}
+    <div class="max-width" style=" margin-left: 180px; margin-right: 20px; margin-top: 0px; background-image: url('images/con.png');">
+        <h2 class="title">Contact Us</h2>
+        <div class="contact-content">
+            <div class="column left">
+                <div class="text"><b>Get in Touch</b></div>
+                <p><mark>Life becomes a celebration when friends keep in touch, so let's celebrate our life by keeping in
+                    touch with each other.</mark></p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <button class="btn btn-success"type="submit" >SUBMIT</button>
+                    </form> 
+            </div>
+        </div>
+        
+    </div>
+    
+{% comment %} </section> {% endcomment %}
 {%endblock%}
+
+
+{% comment %} <div class="contact-content">
+    <div class="column left">
+        <div class="text">Get in Touch</div>
+        <p>Life becomes a celebration when friends keep in touch, so let's celebrate our life by keeping in touch with
+            each other.</p>
+        <div class="icons">
+            <div class="row">
+                <i class="fas fa-user"></i>
+                <div class="info">
+                    <div class="head">Name</div>
+                    <div class="sub-title">Chetan Parmar</div>
+                </div>
+            </div>
+            <div class="row">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="info">
+                    <div class="head">Address</div>
+                    <div class="sub-title">Cleanest Town in country, ❤️Indore, Madhya Pradesh.</div>
+                </div>
+            </div>
+            <div class="row">
+                <i class="fas fa-envelope"></i>
+                <div class="info">
+                    <div class="head">Email</div>
+                    <div class="sub-title">cparmar613@gmail.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endcomment %}

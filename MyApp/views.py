@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from MyApp.forms import SignUpForm,CustomerForm,TransferForm,RequestForm
 from django.http import HttpResponseRedirect
-from MyApp.models import Customer,Notification
+from MyApp.models import Customer,Notification,Contact
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from datetime import date
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
+
 
 
 
@@ -59,6 +62,7 @@ def transfer_view(request):
                customerTo.balance=customerTo.balance+amount
                customerFrom.save()
                customerTo.save()
+
                createNotificationFrom="{}/- has been debited from your account {} on {}. ".format(amount,customerFrom.phonenum,date.today())
                createNotificationTo="{}/- has been credited to you account by {} on {}. ".format(amount,customerFrom.phonenum,date.today())
                notificationFrom=Notification(user_name=request.user,notification=createNotificationFrom)
@@ -73,6 +77,8 @@ def transfer_view(request):
             msg='Invalid pass'
     form=TransferForm()
     return render(request,'MyApp/transfer.html',{'form':form,'msg':msg,'noti_count':noti_count})
+
+
 
 @login_required
 def requestMoney_view(request):
@@ -97,6 +103,7 @@ def requestMoney_view(request):
     return render(request,'MyApp/requestMoney.html',{'form':form,'msg':msg,'noti_count':noti_count})
 
 
+
 @login_required
 def notification_view(request):
         noti_count=Notification.objects.filter(user_name_id=request.user.id).count()
@@ -108,17 +115,30 @@ def notification_view(request):
            notifications=Notification.objects.filter(user_name=request.user)
         return render(request,'MyApp/see_notification.html',{'notifications':notifications,'noti_count':noti_count})
 
-def contact_view(request):
-    return render(request,'MyApp/contact.html')
+
+
+class contactView(SuccessMessageMixin,CreateView):
+    model = Contact
+    template_name = 'MyApp/contact.html'
+    fields = ['full_name','email','message','date']
+    success_url = reverse_lazy('Home')
+    success_message = 'Thanks For Contact Us..!!'
+
+    def form_valid(self, form):
+        form.save()
+        return super(contactView,self).form_valid(form)
+
 
 
 def clients_view(request):
     return render(request,'MyApp/clients.html')
 
 
+
 def about_view(request):
     return render(request,'MyApp/about.html')
-    
+
+
 
 def service_view(request):
     return render(request,'MyApp/service.html')
