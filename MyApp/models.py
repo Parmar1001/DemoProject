@@ -13,7 +13,8 @@ class Branch(models.Model):
 
 class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
-    user_name=models.OneToOneField(User,on_delete=models.CASCADE)
+    # user_name=models.OneToOneField(User,on_delete=models.CASCADE)
+    user_name=models.OneToOneField(User,null=True, blank=True,on_delete=models.CASCADE,related_name='customer')
     date_of_open=models.DateTimeField(auto_now_add=True)
     balance=models.FloatField()
     ACCOUNT_CHOICE = (
@@ -30,7 +31,8 @@ class Customer(models.Model):
     )
     state = models.CharField(choices=state_choices, max_length=255, default='Madhya Pradesh')
     phonenum=models.CharField(max_length=10)
-    profile_pic=models.ImageField(upload_to='MyApp/static/images/',default=None)  
+    # profile_pic=models.ImageField(upload_to='MyApp/static/images/',default=None)  
+    profile_pic=models.ImageField(default="user.gif",null=True, blank=True)  
 
 
 class Notification(models.Model):
@@ -38,6 +40,7 @@ class Notification(models.Model):
     user_name=models.ForeignKey(User,on_delete=models.CASCADE)
     notification=models.CharField(max_length=200,default=None)
     
+
 class Contact(models.Model):
     full_name= models.CharField(max_length=50,blank=False) 
     email= models.EmailField (max_length=254,blank=False) 

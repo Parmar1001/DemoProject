@@ -43,8 +43,23 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'MyApp',
     'crispy_forms',
+    'silk',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'django.contrib.sites',
 
 ]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [   
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -56,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'PaperSafeBank.urls'
@@ -138,6 +154,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'MyApp/static/images')
+
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'MyApp/static')
@@ -148,3 +167,12 @@ STATICFILES_DIRS=[
 LOGIN_REDIRECT_URL='/MyApp/customerinfo/'
 LOGOUT_REDIRECT_URL='/MyApp/Home/'
 LOGIN_URL = 'account_login' 
+
+ACCOUNT_FORMS = {'signup':'MyApp.forms.SignupForm',}
+# This is Emali settings
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = "chetandjango@gmail.com"
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_PASSWORD ='safkjltebvuih'
+# EMAIL_USE_SSL=False
