@@ -6,43 +6,37 @@
 <br>
 <br>
 <br>
-<div align='center' style=" margin-left: 150px;">
-  <img style="height:200px;width:300px;" src="{{request.user.customer.profile_pic.url}}">
-</div>
-<br>
-
-{%if show_bal%}
-<br>
-<table border="1px" align='center' style=" margin-left: 440px;">
+<div align='center' style=" margin-left: 150px;" >
+        <img  style="height:200px;width:300px;" src="{% static 'images/dj.jpg' %}">
+      </div>
+      <br>
+      {%if show_bal%}
+        <br>
+        <table border="1px" align='center' style=" margin-left: 470px;">
+          <tr>
+          <td> <h2 style="color:rgb(15, 235, 169);">Your current balance is : {{customer.balance}}</h2>
+</td>
+          </tr>
+        </table>
+        {%endif%}
+        
+<table align='center' style=" margin-left: 600px;">
+<form  method="post">
   <tr>
-    <td>
-      <h2 style="color:rgb(1, 8, 6);">{{user.first_name}} your current balance is : {{customer.balance}}</h2>
-    </td>
+<td>    <button type="submit" class="btn btn-success" style="width:200px;margin-left: 25px;">Check Balance</button></td>
+{%csrf_token%}
   </tr>
-
-</table>
-{%endif%}
-
-<table align='center' style=" margin-left: 550px;">
-  <form method="post">
-    <tr>
-      <td> <button type="submit" class="btn btn-success" style="width:200px;margin-left: 25px;">Check Balance</button>
-      </td>
-      {%csrf_token%}
-    </tr>
   </form>
   <br>
   <tr>
-    <td><a href="/MyApp/transfer/"><button type="button" class="btn btn-success"
-          style="width:200px;margin-left: 25px;">Transfer Money</button></a> </td>
+  <td><a href="{% url 'transfer' %}"><button type="button" class="btn btn-success" style="width:200px;margin-left: 25px;">Transfer Money</button></a> </td>
   </tr>
   <br>
-  <tr>
-    <td> <a href="/MyApp/requestmoney"> <button type="button" class="btn btn-success"
-          style="width:200px;margin-left: 25px;">Request Money</button></a>
-    </td>
-  </tr>
-  <br>
+<tr>
+<td> <a href="{% url 'requestmoney' %}"> <button type="button" class="btn btn-success" style="width:200px;margin-left: 25px;">Request Money</button></a> 
+</td>
+</tr>
+<br>
 </table>
-
+        
 {%endblock%}

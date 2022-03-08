@@ -9,28 +9,38 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('MyApp', '0005_rename_city_branch_branch_city_and_more'),
+        ("MyApp", "0005_rename_city_branch_branch_city_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customer',
-            name='account_type',
-            field=models.CharField(choices=[('Saving', 'Saving'), ('Current', 'Current')], default='Saving', max_length=20),
+            model_name="customer",
+            name="account_type",
+            field=models.CharField(
+                choices=[("Saving", "Saving"), ("Current", "Current")],
+                default="Saving",
+                max_length=20,
+            ),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='branch_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='MyApp.branch'),
+            model_name="customer",
+            name="branch_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="MyApp.branch"
+            ),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='user_name',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="customer",
+            name="user_name",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='notification',
-            name='user_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="notification",
+            name="user_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

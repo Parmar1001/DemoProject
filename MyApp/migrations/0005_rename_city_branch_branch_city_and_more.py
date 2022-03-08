@@ -9,43 +9,55 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('MyApp', '0004_rename_name_customer_branch_name'),
+        ("MyApp", "0004_rename_name_customer_branch_name"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='branch',
-            old_name='city',
-            new_name='branch_city',
+            model_name="branch",
+            old_name="city",
+            new_name="branch_city",
         ),
         migrations.RenameField(
-            model_name='branch',
-            old_name='name',
-            new_name='branch_name',
+            model_name="branch",
+            old_name="name",
+            new_name="branch_name",
         ),
         migrations.RenameField(
-            model_name='branch',
-            old_name='state',
-            new_name='branch_state',
+            model_name="branch",
+            old_name="state",
+            new_name="branch_state",
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='branch_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customers', to='MyApp.branch'),
+            model_name="customer",
+            name="branch_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="customers",
+                to="MyApp.branch",
+            ),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='profile_pic',
-            field=models.ImageField(default=None, upload_to='static/images/'),
+            model_name="customer",
+            name="profile_pic",
+            field=models.ImageField(default=None, upload_to="static/images/"),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='user_name',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='customer', to=settings.AUTH_USER_MODEL),
+            model_name="customer",
+            name="user_name",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="customer",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AlterField(
-            model_name='notification',
-            name='user_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notification', to=settings.AUTH_USER_MODEL),
+            model_name="notification",
+            name="user_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="notification",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

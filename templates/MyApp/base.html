@@ -29,25 +29,30 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="/MyApp/Home/"> Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'Home' %}"> Home <span class="sr-only">(current)</span></a>
           </li>
 
         </ul>
         <ul class="navbar-nav  ml-auto">
           {%if request.user.first_name%}
           <li class="nav-item">
-            <a class="nav-link" href="/MyApp/notification/">Notification({{noti_count}})</a>
+            <a class="nav-link" href="{% url 'notification' %}">Notification({{noti_count}})</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/MyApp/customerinfo/">Profile</a>
+          <a class="nav-link" href="{% url 'customer_info' user.id %}">Customer Info </a> 
+          
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Profile page</a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="#">Hello {{request.user.first_name}}</a>
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" href="/account/logout/">Logout</a>
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
           </li>
 
           {%else%}
@@ -76,7 +81,8 @@
     {% if messages %}
     <div class="alert alert-dismissible alert-success">
       <button type="button" class="close" data-dismiss="alert">
-        <a href="{% url 'Home' %}">×</a>
+      {% comment %} <a href="{% url 'Home' %}">×</a> {% endcomment %}
+      <a href="{% url 'Home' %}">Go to home</a>
       </button>
       {% for message in messages %}
       <li style=" margin-left: 300px;  margin-top: 10px;">{{message}}</li>
@@ -88,7 +94,7 @@
       <a href="{% url 'about' %}">About</a>
       <a href="{% url 'service' %}">Services</a>
       <a href="{% url 'clients' %}">Clients</a>
-      <a href="{% url 'contact' %}">Contact</a>
+      {% comment %} <a href="{% url 'contact' %}">Contact</a> {% endcomment %}
     </div>
 
     {% block home %}

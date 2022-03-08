@@ -9,28 +9,34 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('MyApp', '0001_initial'),
+        ("MyApp", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customer',
-            name='branch_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='MyApp.branch'),
+            model_name="customer",
+            name="branch_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="MyApp.branch"
+            ),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='profile_pic',
-            field=models.ImageField(default=None, upload_to=''),
+            model_name="customer",
+            name="profile_pic",
+            field=models.ImageField(default=None, upload_to=""),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='user_name',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="customer",
+            name="user_name",
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
         migrations.AlterField(
-            model_name='notification',
-            name='user_name',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="notification",
+            name="user_name",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]

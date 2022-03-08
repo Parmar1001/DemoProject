@@ -15,34 +15,64 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Branch',
+            name="Branch",
             fields=[
-                ('branch_name', models.CharField(max_length=20, primary_key=True, serialize=False)),
-                ('branch_city', models.CharField(max_length=20)),
-                ('branch_state', models.CharField(max_length=30)),
+                (
+                    "branch_name",
+                    models.CharField(max_length=20, primary_key=True, serialize=False),
+                ),
+                ("branch_city", models.CharField(max_length=20)),
+                ("branch_state", models.CharField(max_length=30)),
             ],
         ),
         migrations.CreateModel(
-            name='Notification',
+            name="Notification",
             fields=[
-                ('notification_id', models.AutoField(primary_key=True, serialize=False)),
-                ('notification', models.CharField(default=None, max_length=200)),
-                ('user_name', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notification', to=settings.AUTH_USER_MODEL)),
+                (
+                    "notification_id",
+                    models.AutoField(primary_key=True, serialize=False),
+                ),
+                ("notification", models.CharField(default=None, max_length=200)),
+                (
+                    "user_name",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="notification",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('customer_id', models.AutoField(primary_key=True, serialize=False)),
-                ('date_of_open', models.DateTimeField(auto_now_add=True)),
-                ('balance', models.FloatField()),
-                ('account_type', models.CharField(max_length=20)),
-                ('city', models.CharField(default=None, max_length=30)),
-                ('state', models.CharField(default=None, max_length=30)),
-                ('phonenum', models.CharField(max_length=10)),
-                ('profile_pic', models.ImageField(default=None, upload_to='static/images/')),
-                ('branch_name', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customers', to='MyApp.branch')),
-                ('user_name', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='customer', to=settings.AUTH_USER_MODEL)),
+                ("customer_id", models.AutoField(primary_key=True, serialize=False)),
+                ("date_of_open", models.DateTimeField(auto_now_add=True)),
+                ("balance", models.FloatField()),
+                ("account_type", models.CharField(max_length=20)),
+                ("city", models.CharField(default=None, max_length=30)),
+                ("state", models.CharField(default=None, max_length=30)),
+                ("phonenum", models.CharField(max_length=10)),
+                (
+                    "profile_pic",
+                    models.ImageField(default=None, upload_to="static/images/"),
+                ),
+                (
+                    "branch_name",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="customers",
+                        to="MyApp.branch",
+                    ),
+                ),
+                (
+                    "user_name",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="customer",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
