@@ -1,0 +1,21 @@
+{% extends "MyApp/base.html" %}
+{%load static%}
+{% block update_profile %}    
+{% load crispy_forms_tags %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}"
+</head>
+<form method="post" enctype="multipart/form-data" style="border:1px solid #ccc">
+  <div class="container" style=" margin-left: 150px;  margin-top: 0px;">
+    <h1>Profile Update </h1>
+    <p>Update your Profile </p>
+    <hr>
+  {% csrf_token %}
+  {{form|crispy}}
+  <div class="clearfix">
+    <a href="{% url 'Home' %}"><button type="button" class="cancelbtn">Cancel</button></a>
+    <a href=""><button type="submit" class="signupbtn">Update Profile</button></a>
+    </div>
+  </div>
+</form>
+{% endblock  %}  

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django.contrib.sites",
+    # "django_celery_results",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -149,3 +150,24 @@ LOGIN_URL = "account_login"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+
+# CELERY STUFF
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'Asia/Kolkata'
+
+# MAIL SETTINGS
+# EMAIL_HOST = 'smtp.sendgrid.net'
+# EMAIL_HOST_USER = 'apikey'
+# EMAIL_HOST_PASSWORD ='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'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# FAIL_SILENTLY = False
+
+# DJANGO-CELERY-EMAIL
+# INSTALLED_APPS += ('MyApp')
+# EMAIL_BACKEND = 'MyApp.backends.CeleryEmailBackend'

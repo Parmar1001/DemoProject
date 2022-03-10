@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from MyApp.forms import TransferForm, RequestForm  # SignUpForm,
+from MyApp.forms import TransferForm, RequestForm #SignupForm
 from django.http import HttpResponseRedirect
 from MyApp.models import Customer, Notification
 from django.urls import reverse
@@ -7,8 +7,10 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView
-from django.views.generic import DetailView
+# from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
+# from .tasks import send_email
+# import redis
 
 
 # Create your views here.
@@ -47,13 +49,21 @@ class ProfileView(CreateView):
     success_url = reverse_lazy('Home')
     fields = [
         "profile_pic",
-        "balance",
         "phonenum",
+        "balance",
         "account_type",
         "state",
         "city",
         "branch_name",
     ]
+
+    def get_initial(self):
+        # Get the initial dictionary from the superclass method
+        initial = super(ProfileView, self).get_initial()
+        # Copy the dictionary so we don't accidentally change a mutable dict
+        initial = initial.copy()
+        initial['phonenum'] = self.request.user.username
+        return initial
 
     def form_valid(self, form):
         user = self.request.user
@@ -61,10 +71,28 @@ class ProfileView(CreateView):
         form.save()
         return super(ProfileView, self).form_valid(form)
 
-    # def get_success_url(self, **kwargs):
-    #     customer_id = self.model.objects.get(user_id=self.request.user.pk).pk
-    #     return reverse("customer_info", kwargs={"pk": customer_id})
+    def get_success_url(self, **kwargs):
+        customer_id = self.model.objects.get(user_id=self.request.user.pk).pk
+        return reverse("customer_info", kwargs={"pk": customer_id})
 
+
+# class UpdateProfileView(UpdateView):
+#     model = Customer
+#     template_name = "MyApp/update_profile.html"
+#     fields = [
+#         "profile_pic",
+#         "balance",
+#         "phonenum",
+#         "account_type",
+#         "state",
+#         "city",
+#         "branch_name",
+#     ]
+#     success_url = reverse_lazy('Home')
+
+#     def update_profile(request, pk):
+#         import pdb;pdb.set_trace()
+#         profile = get_object_or_404(Customer, id=pk)
 
 
 @login_required
@@ -72,7 +100,8 @@ def CustomerInfo(request,pk):
     # import pdb;pdb.set_trace()
     show_bal=False
     current_user=request.user
-    customer=Customer.objects.get(user_id=pk)
+    # import pdb;pdb.set_trace()
+    customer=Customer.objects.get(customer_id=pk)
     if request.method=='POST':
             show_bal=True
     return render(request,'MyApp/cust_info.html',{'customer':customer,'current_user':current_user,'show_bal':show_bal})
@@ -88,6 +117,7 @@ def TransferView(request):
             toAccount = request.POST["accno"]
             amount = float(request.POST["amount"])
             ProfileView = Customer.objects.get(user_id=request.user.id)
+            # import pdb;pdb.set_trace()
             customerTo = Customer.objects.get(phonenum=toAccount)
             if ProfileView.balance > amount:
                 ProfileView.balance = ProfileView.balance - amount
@@ -118,6 +148,9 @@ def TransferView(request):
                 msg = "Insufficent amount"
         else:
             msg = "Invalid pass"
+        #     redis_host = redis.Redis(host="localhost", db=0)
+        #     redis.set
+        # send_email.delay()
     form = TransferForm()
     return render(
         request,
@@ -161,6 +194,12 @@ def RequestMoneyView(request):
         {"form": form, "msg": msg, "noti_count": noti_count},
     )
 
+# def SendEmail(request):
+#     # Send mail synchronously
+#     #send_email()
+#     # Send email asynchronously.
+#     send_email.delay()
+#     return render(request,)
 
 @login_required
 def NotificationView(request):
