@@ -149,7 +149,7 @@ LOGOUT_REDIRECT_URL = "account_login"
 LOGIN_URL = "account_login"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_VERIFICATION = "True"
 
 
 # CELERY STUFF
@@ -171,3 +171,11 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # DJANGO-CELERY-EMAIL
 # INSTALLED_APPS += ('MyApp')
 # EMAIL_BACKEND = 'MyApp.backends.CeleryEmailBackend'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='chetandjango@gmail.com'
+EMAIL_HOST_PASSWORD='Amar@6143'
+EMAIL_PORT=587
+EMAIL_USE_SSL=False

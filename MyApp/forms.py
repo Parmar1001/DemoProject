@@ -58,3 +58,8 @@ class RequestForm(forms.Form):
     accno = forms.CharField(label="Frequest from user", max_length=10)
     amount = forms.FloatField(label="Request Amount")
     pin = forms.CharField(max_length=20, label="Your pin")
+
+
+class EmailSendForm(forms.Form):
+    name=forms.CharField()
+    to=forms.EmailField()

@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from datetime import date
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 # from .tasks import send_email
@@ -144,6 +146,13 @@ def TransferView(request):
                 notificationFrom.save()
                 noti_count = noti_count + 1
                 msg = "Transfered"
+                senderUser=User.objects.get(id=request.user.id)
+                receiverUser=User.objects.get(username=toAccount)
+                subject='PaperSaveBank Notification'
+                emailToSender="Dear {} {}\n\n{}/- has been debited from your account {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(senderUser.first_name,senderUser.last_name,amount,ProfileView.phonenum,date.today())
+                emailToReciever="Dear {} {}\n\n{}/- has been credited to you account by {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(receiverUser.first_name,receiverUser.last_name,amount,ProfileView.phonenum,date.today())
+                send_mail(subject,emailToSender,'chetandjango@gmail.com',[senderUser.email,],fail_silently=False)
+                send_mail(subject,emailToReciever,'chetandjango@gmail.com',[receiverUser.email,],fail_silently=False)
             else:
                 msg = "Insufficent amount"
         else:
