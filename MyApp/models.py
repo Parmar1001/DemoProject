@@ -1,8 +1,7 @@
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
-
-# from django.utils import timezone
+from django.utils import timezone
 
 
 # Create your models here.
@@ -58,8 +57,8 @@ class Notification(models.Model):
     notification = models.CharField(max_length=200, default=None)
 
 
-# class Contact(models.Model):
-#     full_name= models.CharField(max_length=50,blank=False)
-#     email= models.EmailField (max_length=254,blank=False)
-#     message= models.TextField(max_length=1000,blank=False)
-#     # date= models.DateTimeField(default= timezone.now)
+class Contact(models.Model):
+    full_name= models.CharField(max_length=50,blank=False)
+    email= models.EmailField (max_length=254,blank=False)
+    message= models.TextField(max_length=1000,blank=False)
+    date= models.DateTimeField(default= timezone.now)

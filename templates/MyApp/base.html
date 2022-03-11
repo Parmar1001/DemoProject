@@ -34,22 +34,21 @@
 
         </ul>
         <ul class="navbar-nav  ml-auto">
-          {%if request.user.first_name%}
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'notification' %}">Notification({{noti_count}})</a>
           </li>
-
+          {% if request.user.customer %}
           <li class="nav-item">
-          <a class="nav-link" href="{% url 'customer_info' request.user.customer.customer_id %}">Customer Info </a> 
+          <a class="nav-link" href="{% url 'customer_info' request.user.customer.customer_id %}">Customer Info </a>
+          {% endif %} 
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profile' %}">Profile page</a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="#">Hello {{request.user.first_name}}</a>
           </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
           </li>
@@ -57,7 +56,6 @@
           {%else%}
 
           
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_login' %}">Login</a>
           </li>
@@ -93,7 +91,7 @@
       <a href="{% url 'about' %}">About</a>
       <a href="{% url 'service' %}">Services</a>
       <a href="{% url 'clients' %}">Clients</a>
-      {% comment %} <a href="{% url 'contact' %}">Contact</a> {% endcomment %}
+      <a href="{% url 'contact' %}">Contact</a> 
     </div>
 
     {% block home %}

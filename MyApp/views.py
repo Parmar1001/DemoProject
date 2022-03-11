@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from MyApp.forms import TransferForm, RequestForm #SignupForm
+from MyApp.forms import TransferForm, RequestForm  # SignupForm
 from django.http import HttpResponseRedirect
-from MyApp.models import Customer, Notification
+from MyApp.models import Customer, Notification,Contact
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import date
@@ -9,8 +9,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+
 # from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
+
 # from .tasks import send_email
 # import redis
 
@@ -24,31 +26,10 @@ def profile_view(request):
     return render(request, "MyApp/profile.html")
 
 
-# def signup_view(request):
-#     if request.method=='POST':
-#        signupform=SignUpForm(request.POST)
-#        customerform=CustomerForm(request.POST,request.FILES)
-#        if signupform.is_valid() :
-#            user=signupform.save()
-#            user.set_password(user.password)
-#            if customerform.is_valid():
-#                customerinfo=customerform.save(commit=False)
-#                customerinfo.phonenum=user.username
-#                customerinfo.user_name=user
-#                customerinfo.save()
-#                user.save()
-#                return HttpResponseRedirect(reverse('login'))
-#     signupform=SignUpForm()
-#     customerform=CustomerForm()
-#     import pdb;pdb.set_trace()
-#     mydict={'signupform':signupform,'customerform':customerform}
-#     return render(request,'signup.html',context=mydict)
-
-
 class ProfileView(CreateView):
     model = Customer
     template_name = "MyApp/profile.html"
-    success_url = reverse_lazy('Home')
+    success_url = reverse_lazy("Home")
     fields = [
         "profile_pic",
         "phonenum",
@@ -64,7 +45,7 @@ class ProfileView(CreateView):
         initial = super(ProfileView, self).get_initial()
         # Copy the dictionary so we don't accidentally change a mutable dict
         initial = initial.copy()
-        initial['phonenum'] = self.request.user.username
+        initial["phonenum"] = self.request.user.username
         return initial
 
     def form_valid(self, form):
@@ -98,15 +79,19 @@ class ProfileView(CreateView):
 
 
 @login_required
-def CustomerInfo(request,pk):
+def CustomerInfo(request, pk):
     # import pdb;pdb.set_trace()
-    show_bal=False
-    current_user=request.user
+    show_bal = False
+    current_user = request.user
     # import pdb;pdb.set_trace()
-    customer=Customer.objects.get(customer_id=pk)
-    if request.method=='POST':
-            show_bal=True
-    return render(request,'MyApp/cust_info.html',{'customer':customer,'current_user':current_user,'show_bal':show_bal})
+    customer = Customer.objects.get(customer_id=pk)
+    if request.method == "POST":
+        show_bal = True
+    return render(
+        request,
+        "MyApp/cust_info.html",
+        {"customer": customer, "current_user": current_user, "show_bal": show_bal},
+    )
 
 
 @login_required
@@ -146,13 +131,43 @@ def TransferView(request):
                 notificationFrom.save()
                 noti_count = noti_count + 1
                 msg = "Transfered"
-                senderUser=User.objects.get(id=request.user.id)
-                receiverUser=User.objects.get(username=toAccount)
-                subject='PaperSaveBank Notification'
-                emailToSender="Dear {} {}\n\n{}/- has been debited from your account {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(senderUser.first_name,senderUser.last_name,amount,ProfileView.phonenum,date.today())
-                emailToReciever="Dear {} {}\n\n{}/- has been credited to you account by {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(receiverUser.first_name,receiverUser.last_name,amount,ProfileView.phonenum,date.today())
-                send_mail(subject,emailToSender,'chetandjango@gmail.com',[senderUser.email,],fail_silently=False)
-                send_mail(subject,emailToReciever,'chetandjango@gmail.com',[receiverUser.email,],fail_silently=False)
+                senderUser = User.objects.get(id=request.user.id)
+                receiverUser = User.objects.get(username=toAccount)
+
+                
+                subject = "PaperSaveBank Notification"
+                emailToSender = "Dear {} {}\n\n{}/- has been debited from your account {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(
+                    senderUser.first_name,
+                    senderUser.last_name,
+                    amount,
+                    ProfileView.phonenum,
+                    date.today(),
+                )
+                emailToReciever = "Dear {} {}\n\n{}/- has been credited to you account by {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(
+                    receiverUser.first_name,
+                    receiverUser.last_name,
+                    amount,
+                    ProfileView.phonenum,
+                    date.today(),
+                )
+                send_mail(
+                    subject,
+                    emailToSender,
+                    "chetandjango@gmail.com",
+                    [
+                        senderUser.email,
+                    ],
+                    fail_silently=False,
+                )
+                send_mail(
+                    subject,
+                    emailToReciever,
+                    "chetandjango@gmail.com",
+                    [
+                        receiverUser.email,
+                    ],
+                    fail_silently=False,
+                )
             else:
                 msg = "Insufficent amount"
         else:
@@ -186,8 +201,7 @@ def RequestMoneyView(request):
                 reqAmount, reqTo.phonenum, date.today()
             )
             notificationTo = Notification(
-                user=reqTo.user,
-                 notification=createNotificationTo
+                user=reqTo.user, notification=createNotificationTo
             )
             notificationToMe = Notification(
                 user=reqFrom.user, notification=createNotificationToMe
@@ -203,12 +217,14 @@ def RequestMoneyView(request):
         {"form": form, "msg": msg, "noti_count": noti_count},
     )
 
+
 # def SendEmail(request):
 #     # Send mail synchronously
 #     #send_email()
 #     # Send email asynchronously.
 #     send_email.delay()
 #     return render(request,)
+
 
 @login_required
 def NotificationView(request):
@@ -222,16 +238,16 @@ def NotificationView(request):
     )
 
 
-# class contactView(SuccessMessageMixin,CreateView):
-#     model = Contact
-#     template_name = 'MyApp/contact.html'
-#     fields = ['full_name','email','message','date']
-#     success_url = reverse_lazy('Home')
-#     success_message = 'Thanks For Contact Us..!!'
+class contactView(SuccessMessageMixin,CreateView):
+    model = Contact
+    template_name = 'MyApp/contact.html'
+    fields = ['full_name','email','message','date']
+    success_url = reverse_lazy('Home')
+    success_message = 'Thanks For Contact Us..!!'
 
-#     def form_valid(self, form):
-#         form.save()
-#         return super(contactView,self).form_valid(form)
+    def form_valid(self, form):
+        form.save()
+        return super(contactView,self).form_valid(form)
 
 
 def ClientsView(request):

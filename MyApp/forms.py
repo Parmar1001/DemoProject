@@ -61,5 +61,5 @@ class RequestForm(forms.Form):
 
 
 class EmailSendForm(forms.Form):
-    name=forms.CharField()
-    to=forms.EmailField()
+    name = forms.CharField()
+    to = forms.EmailField()

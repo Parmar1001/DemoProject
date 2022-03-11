@@ -8,7 +8,6 @@
 # from sendgrid.helpers.mail import Mail, Email, To, Content
 
 
-
 # @shared_task
 # def send_email():
 #     sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('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'))
@@ -35,4 +34,3 @@
 #     # except smtplib.SMTPException:
 #     #     return 0
 #     # return mail
-
