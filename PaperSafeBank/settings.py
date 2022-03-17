@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "api",
     "MyApp",
     "crispy_forms",
     "allauth",
@@ -47,6 +48,8 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "django.contrib.sites",
     'rest_framework',
+    'rest_framework.authtoken',
+    # 'rest_auth',
     # 'snippets',
     # "django_celery_results",
 ]
@@ -153,6 +156,17 @@ LOGIN_URL = "account_login"
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10    
+}
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  
+    ],
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated', )
+}
 
 # CELERY STUFF
 # CELERY_BROKER_URL = 'redis://localhost:6379'
