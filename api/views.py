@@ -1,6 +1,5 @@
 from MyApp.models import Customer, Branch, Notification, Contact
 from rest_framework import viewsets #permissions
- 
 from .serializers import CustomerSerializer, BranchSerializer, NotificationSerializer, ContactSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication
