@@ -7,18 +7,26 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('MyApp', '0015_rename_user_name_notification_user'),
+        ("MyApp", "0015_rename_user_name_notification_user"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Contact',
+            name="Contact",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('full_name', models.CharField(max_length=50)),
-                ('email', models.EmailField(max_length=254)),
-                ('message', models.TextField(max_length=1000)),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("full_name", models.CharField(max_length=50)),
+                ("email", models.EmailField(max_length=254)),
+                ("message", models.TextField(max_length=1000)),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
     ]

@@ -47,8 +47,11 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "django.contrib.sites",
-    'rest_framework',
-    'rest_framework.authtoken',
+    "rest_framework_simplejwt",  # for Jwt
+    "rest_framework",
+    # 'django.contrib.staticfiles',  # required for serving swagger ui's css/js files
+    "drf_yasg",
+    # 'rest_framework.authtoken', # for Token Auth
     # 'rest_auth',
     # 'snippets',
     # "django_celery_results",
@@ -79,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.media",
             ],
         },
     },
@@ -157,16 +161,21 @@ LOGIN_URL = "account_login"
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10    
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
 }
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  
-    ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated', )
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
 }
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework.authentication.TokenAuthentication',
+#     ],
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated', )
+# }
 
 # CELERY STUFF
 # CELERY_BROKER_URL = 'redis://localhost:6379'
@@ -195,3 +204,16 @@ EMAIL_HOST_USER = "chetandjango@gmail.com"
 EMAIL_HOST_PASSWORD = "Amar@6143"
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+from datetime import timedelta
+
+SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=120)}
+
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "API": {"type": "apiKey", "name": "Authorization", "in": "header"}
+    }
+}

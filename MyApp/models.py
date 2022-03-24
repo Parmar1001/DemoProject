@@ -46,7 +46,7 @@ class Customer(models.Model):
         choices=state_choices, max_length=255, default="Madhya Pradesh"
     )
     phonenum = models.CharField(max_length=10)
-    profile_pic = models.ImageField(upload_to="MyApp/static/images/", default=None)
+    profile_pic = models.ImageField(upload_to="MyApp/sta", default=None)
 
 
 class Notification(models.Model):
@@ -58,7 +58,7 @@ class Notification(models.Model):
 
 
 class Contact(models.Model):
-    full_name= models.CharField(max_length=50,blank=False)
-    email= models.EmailField (max_length=254,blank=False)
-    message= models.TextField(max_length=1000,blank=False)
-    date= models.DateTimeField(default= timezone.now)
+    full_name = models.CharField(max_length=50, blank=False)
+    email = models.EmailField(max_length=254, blank=False)
+    message = models.TextField(max_length=1000, blank=False)
+    date = models.DateTimeField(default=timezone.now)

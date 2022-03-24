@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from MyApp.forms import TransferForm, RequestForm  # SignupForm
 from django.http import HttpResponseRedirect
-from MyApp.models import Customer, Notification,Contact
+from MyApp.models import Customer, Notification, Contact
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import date
@@ -134,7 +134,6 @@ def TransferView(request):
                 senderUser = User.objects.get(id=request.user.id)
                 receiverUser = User.objects.get(username=toAccount)
 
-                
                 subject = "PaperSaveBank Notification"
                 emailToSender = "Dear {} {}\n\n{}/- has been debited from your account {} on {}.\n\nIf you have not done this transaction report to toll free number 8770546985\n\n\n\n\n\n\nBest Regards\n\n\nPaperSaveBank ".format(
                     senderUser.first_name,
@@ -238,16 +237,16 @@ def NotificationView(request):
     )
 
 
-class contactView(SuccessMessageMixin,CreateView):
+class contactView(SuccessMessageMixin, CreateView):
     model = Contact
-    template_name = 'MyApp/contact.html'
-    fields = ['full_name','email','message','date']
-    success_url = reverse_lazy('Home')
-    success_message = 'Thanks For Contact Us..!!'
+    template_name = "MyApp/contact.html"
+    fields = ["full_name", "email", "message", "date"]
+    success_url = reverse_lazy("Home")
+    success_message = "Thanks For Contact Us..!!"
 
     def form_valid(self, form):
         form.save()
-        return super(contactView,self).form_valid(form)
+        return super(contactView, self).form_valid(form)
 
 
 def ClientsView(request):
