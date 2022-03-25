@@ -214,7 +214,7 @@ EMAIL_HOST_PASSWORD = "Amar@6143"
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.CompressedStaticFilesStorage'
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
