@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT PaperSafeBank.wsgi:application
+web: waitress-serve --port=$PORT PaperSafeBank.wsgi:application 
