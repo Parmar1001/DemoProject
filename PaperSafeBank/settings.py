@@ -107,10 +107,10 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': os.environ['NAME'],
-       'USER': os.environ['USER'],
-       'PASSWORD': os.environ['PASSWORD'],
-       'HOST': ['papersavebank.herokuapp.com','localhost'],
+       'NAME': 'customer',
+       'USER': 'demo',
+       'PASSWORD': 'demo',
+       'HOST': 'localhost',
        'PORT': '5432',
    }
 }
