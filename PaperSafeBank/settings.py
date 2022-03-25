@@ -214,8 +214,11 @@ EMAIL_HOST_PASSWORD = "Amar@6143"
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'collected-media'
 
 from datetime import timedelta
 
