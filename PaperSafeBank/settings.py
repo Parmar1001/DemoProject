@@ -112,7 +112,7 @@ DATABASES = {
        'PASSWORD': 'cffdf4578d9b9f8abde4c59f2e072d93379ba1c248825bbb9dea8b9c1ce04527',
        'HOST': 'ec2-18-215-96-22.compute-1.amazonaws.com',
        'PORT': 5432,
-       postgres://ysbzrvnegodgxq:cffdf4578d9b9f8abde4c59f2e072d93379ba1c248825bbb9dea8b9c1ce04527@ec2-18-215-96-22.compute-1.amazonaws.com:5432/dfroc02107jgn
+    #    postgres://ysbzrvnegodgxq:cffdf4578d9b9f8abde4c59f2e072d93379ba1c248825bbb9dea8b9c1ce04527@ec2-18-215-96-22.compute-1.amazonaws.com:5432/dfroc02107jgn
    }
 }
 
