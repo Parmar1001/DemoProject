@@ -23,12 +23,12 @@ TEMPLATE_DIR = BASE_DIR / "templates"
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "+0n6jf!l%)+=*s&1zp91zur&o2_34j1(zd9-$#5j%e%q7fr(7b"
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["papersavebank.herokuapp.com","localhost"]
 
 
 # Application definition
@@ -61,6 +61,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -105,11 +106,11 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 
 DATABASES = {
    'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': 'customer',
-       'USER': 'demo',
-       'PASSWORD': 'demo',
-       'HOST': 'localhost',
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': os.environ['NAME'],
+       'USER': os.environ['USER'],
+       'PASSWORD': os.environ['PASSWORD'],
+       'HOST': ['papersavebank.herokuapp.com','localhost'],
        'PORT': '5432',
    }
 }
@@ -152,8 +153,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "MyApp/static")]
+STATIC_ROOT = BASE_DIR / "static"
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, "MyApp/static")]
 
 SITE_ID = 1
 
