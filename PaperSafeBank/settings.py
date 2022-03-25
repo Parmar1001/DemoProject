@@ -107,13 +107,15 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': os.environ['NAME'],
-       'USER': os.environ['USER'],
-       'PASSWORD': os.environ['PASSWORD'],
-       'HOST': ["papersavebank.herokuapp.com","localhost"],
-       'PORT': '5432',
+       'NAME': "customer",
+       'USER': "demo",
+       'PASSWORD': "demo",
+       'PASSWORDPASSWORD': "localhost",
+       'PORT': '5432',   
    }
 }
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # postgres://vjncqiawullkff:bb5402513c67aa4343aa7d52020b16fa0f28ea3e2980acd03e8b474444b89c60@ec2-18-215-96-22.compute-1.amazonaws.com:5432/dcame18hdktkbl
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -175,8 +177,7 @@ REST_FRAMEWORK = {
     )
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES': [
 #         'rest_framework.authentication.TokenAuthentication',
