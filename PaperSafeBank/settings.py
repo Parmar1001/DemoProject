@@ -23,7 +23,8 @@ TEMPLATE_DIR = BASE_DIR / "templates"
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.environ.get("SECRET_KEY","+0n6jf!l%)+=*s&1zp91zur&o2_34j1(zd9-$#5j%e%q7fr(7b")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -114,6 +115,7 @@ DATABASES = {
        'PORT': '5432',   
    }
 }
+
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 # postgres://vjncqiawullkff:bb5402513c67aa4343aa7d52020b16fa0f28ea3e2980acd03e8b474444b89c60@ec2-18-215-96-22.compute-1.amazonaws.com:5432/dcame18hdktkbl
