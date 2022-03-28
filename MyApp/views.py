@@ -259,3 +259,17 @@ def AboutView(request):
 
 def ServiceView(request):
     return render(request, "MyApp/service.html")
+
+"""
+
+def add(a, b):
+    if a.isdigit() and b.isdigit():
+        return a + b
+    else:
+        raise InvalidArguments("Enter valid values")
+
+add(3,4) => 7
+add('1', 6) =>  
+
+
+"""

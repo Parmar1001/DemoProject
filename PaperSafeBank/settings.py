@@ -32,6 +32,8 @@ DEBUG = os.environ.get("DEBUG",True)
 
 ALLOWED_HOSTS = ["papersavebank.herokuapp.com","127.0.0.1"]
 
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
