@@ -27,6 +27,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY","+0n6jf!l%)+=*s&1zp91zur&o2_34j1(zd9-$#
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 
 ALLOWED_HOSTS = ["papersavebank.herokuapp.com","localhost"]
@@ -104,6 +105,8 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+
+CSRF_TRUSTED_ORIGINS = ["https://PaperSafeBank.herokuapp.com"]
 
 DATABASES = {
    'default': {
