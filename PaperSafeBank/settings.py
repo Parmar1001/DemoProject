@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY","+0n6jf!l%)+=*s&1zp91zur&o2_34j1(zd9-$#
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+DEBUG = os.environ.get("DEBUG",True)
 
 ALLOWED_HOSTS = ["papersavebank.herokuapp.com","localhost"]
 
