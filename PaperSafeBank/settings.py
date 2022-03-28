@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY","+0n6jf!l%)+=*s&1zp91zur&o2_34j1(zd9-$#
 
 DEBUG = os.environ.get("DEBUG",True)
 
-ALLOWED_HOSTS = ["papersavebank.herokuapp.com","localhost"]
+ALLOWED_HOSTS = ["papersavebank.herokuapp.com","127.0.0.1"]
 
 
 # Application definition
@@ -110,17 +110,21 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 DATABASES = {
    'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': "customer",
-       'USER': "demo",
-       'PASSWORD': "demo",
-       'PASSWORDPASSWORD': "localhost",
-       'PORT': '5432',   
+       'NAME': "d6ipf24j3r46os",
+       'USER': "epuwilgdnlvatw",
+       'PASSWORD': "c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f",
+       'HOST': "ec2-3-225-213-67.compute-1.amazonaws.com",
+       'PORT': 5432,   
    }
 }
-
+# postgres://
+# USER: epuwilgdnlvatw:
+# PASSWORD: c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f
+# HOST: ec2-3-225-213-67.compute-1.amazonaws.com:5432/
+# NAME: d6ipf24j3r46os
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
-# postgres://vjncqiawullkff:bb5402513c67aa4343aa7d52020b16fa0f28ea3e2980acd03e8b474444b89c60@ec2-18-215-96-22.compute-1.amazonaws.com:5432/dcame18hdktkbl
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
