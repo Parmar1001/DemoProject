@@ -26,7 +26,7 @@ schema_view = get_schema_view(
       title="API Documentation",
       default_version='v1',
       description="Test description",
-      terms_of_service="https://www.test.com/policies/terms/",
+      terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="chparmar@bestpeers.com"),
       license=openapi.License(name="Test License"),
    ),

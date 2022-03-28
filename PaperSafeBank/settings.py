@@ -106,7 +106,6 @@ WSGI_APPLICATION = "PaperSafeBank.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-CSRF_TRUSTED_ORIGINS = ["https://PaperSafeBank.herokuapp.com"]
 
 DATABASES = {
    'default': {
@@ -235,6 +234,7 @@ SIMPLE_JWT = {"ACCESS_TOKEN_LIFETIME": timedelta(minutes=120)}
 
 SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
-        "API": {"type": "apiKey", "name": "Authorization", "in": "header"}
+        "JWT": {"type": "apiKey", "name": "Authorization", "in": "header"}
     }
 }
+# CSRF_TRUSTED_ORIGINS = ["https://PaperSafeBank.herokuapp.com"]
