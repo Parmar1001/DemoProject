@@ -1,0 +1,68 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI/CD Django, Postgres, Heroku
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    services:
+      postgres_main:
+        image: postgres:12
+        env:
+        POSTGRES_USER: epuwilgdnlvatw
+        POSTGRES_PASSWORD: c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f
+        POSTGRES_DB: d6ipf24j3r46os
+      ports:
+        - 5432:5432
+      options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install requirements
+        run: 
+          pip install -r requirements.txt
+      - name: Run Tests
+        env:
+          DJANGO_SECRET_KEY: CI_CD_TEST_KEY
+          POSTGRES_DB: d6ipf24j3r46os
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: epuwilgdnlvatw
+          POSTGRES_PASSWORD: c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f
+          POSTGRES_PORT: 5432
+          DEBUG: "0"
+        run: |
+            python manage.py test
+
+      # # Runs a single command using the runners shell
+      # - name: Run Collectstatic
+      #   env:
+      #       DJANGO_SECRET_KEY: CI_CD_TEST_KEY
+      #       POSTGRES_DB: d6ipf24j3r46os
+      #       POSTGRES_HOST: localhost
+      #       POSTGRES_USER: epuwilgdnlvatw
+      #       POSTGRES_PASSWORD: c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f
+      #       POSTGRES_PORT: 5432
+      #       DEBUG: "0"
+      #     run: |
+      #         python manage.py migrate
+      

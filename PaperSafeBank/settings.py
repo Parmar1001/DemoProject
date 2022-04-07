@@ -116,7 +116,10 @@ DATABASES = {
        'USER': "epuwilgdnlvatw",
        'PASSWORD': "c3f3f9dde6e5af2f5e9293ba8f094b2b3f089dd7a5819b5b1ceebbc283ab904f",
        'HOST': "ec2-3-225-213-67.compute-1.amazonaws.com",
-       'PORT': 5432,   
+       'PORT': 5432,  
+       'TEST': {
+             'MIRROR': 'default',
+        }, 
    }
 }
 # postgres://

@@ -1,17 +1,17 @@
-from django.shortcuts import render, get_object_or_404
-from MyApp.forms import TransferForm, RequestForm  # SignupForm
-from django.http import HttpResponseRedirect
-from MyApp.models import Customer, Notification, Contact
-from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 from datetime import date
-from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic import CreateView
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render
 # from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
+from django.views.generic import CreateView
+
+from MyApp.forms import RequestForm, TransferForm  # SignupForm
+from MyApp.models import Contact, Customer, Notification
 
 # from .tasks import send_email
 # import redis
@@ -20,10 +20,6 @@ from django.urls import reverse_lazy
 # Create your views here.
 def home_view(request):
     return render(request, "MyApp/home.html")
-
-
-def profile_view(request):
-    return render(request, "MyApp/profile.html")
 
 
 class ProfileView(CreateView):

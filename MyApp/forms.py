@@ -1,8 +1,11 @@
 from distutils.command.upload import upload
+
+from allauth.account.forms import SignupForm
 from django import forms
-from django.contrib.auth.models import User
-from MyApp.models import Customer
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+from MyApp.models import Customer
 
 # class SignUpForm(UserCreationForm):
 #     first_name = forms.CharField(max_length=30)
@@ -12,7 +15,6 @@ from django.contrib.auth.forms import UserCreationForm
 #         fields=['username','password','email','first_name','last_name']
 
 
-from allauth.account.forms import SignupForm
 
 # class MyCustomSignupForm(SignupForm):
 #     balance=forms.CharField(label='Balance',max_length=10)
